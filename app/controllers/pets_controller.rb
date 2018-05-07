@@ -10,7 +10,8 @@ class PetsController < ApplicationController
   end
 
   get '/pets/:id/edit' do
-    @pet = Pet.find(:id)
+    binding.pry
+    @pet = Pet.find_by_id(params[:id])
     erb :'pets/edit'
   end
 
@@ -18,9 +19,9 @@ class PetsController < ApplicationController
 
     @pet = Pet.create(name: params[:pet][:name])
     if params[:pet][:owner_id] != nil
-      @owner = Owner.find(params[:pet][:owner_id])
+      @owner = Owner.find_by_id(params[:pet][:owner_id])
     elsif !params[:owner][:name].empty?
-      @owner.create(params[:owner][:name])
+      @owner = Owner.create(params[:owner])
     end
     @pet.save
     @owner.pets << @pet
