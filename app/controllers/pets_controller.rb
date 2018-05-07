@@ -36,7 +36,6 @@ class PetsController < ApplicationController
   post '/pets/:id' do
     @pet = Pet.find_by_id(params[:id])
     @pet.update(name: params[:pet][:name])
-    binding.pry
     if params[:pet][:owner_id] != nil
       @owner = Owner.find_by_id(params[:pet][:owner_id])
     elsif !params[:owner][:name].empty?
