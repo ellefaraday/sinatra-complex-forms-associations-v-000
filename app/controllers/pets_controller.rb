@@ -15,7 +15,6 @@ class PetsController < ApplicationController
   end
 
   post '/pets' do
-
     @pet = Pet.create(name: params[:pet][:name])
     if params[:pet][:owner_id] != nil
       @owner = Owner.find_by_id(params[:pet][:owner_id])
@@ -35,7 +34,8 @@ class PetsController < ApplicationController
   end
 
   post '/pets/:id' do
-
+    binding.pry
+    @pet.update
     redirect to "pets/#{@pet.id}"
   end
 end
